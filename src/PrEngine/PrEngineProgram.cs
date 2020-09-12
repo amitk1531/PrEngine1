@@ -33,7 +33,21 @@ namespace PrEngine
                 Console.WriteLine("\nEnter the number of items of {0} ", sku.unitPrice.ElementAt(i).Key);
                 try
                 {
-                    numberOfItems.Add(sku.unitPrice.ElementAt(i).Key, Convert.ToInt32(Console.ReadLine()));
+                    int numOfItems = Convert.ToInt32(Console.ReadLine());
+
+                    // Number of Items should be Non-Negative.
+                    if (numOfItems >= 0)
+                    {
+                        numberOfItems.Add(sku.unitPrice.ElementAt(i).Key, numOfItems);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nPlease Enter Non- Negative Numeric Values\n");
+                        Thread.Sleep(1000);
+                        i--;
+                    }
+
+                    
                 }
                 catch (Exception)
                 {
