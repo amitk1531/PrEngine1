@@ -39,6 +39,7 @@ namespace PrEngine
                 {
                     // Error handeling with Retry mechanism - if non-numeric value is entered for the Number of items.
                     Console.WriteLine("\nError!! Please Enter Numeric Values Only\n");
+                    Thread.Sleep(1000);
                     i--;
                 }                              
             }
