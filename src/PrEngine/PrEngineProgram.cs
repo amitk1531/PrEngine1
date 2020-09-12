@@ -31,7 +31,16 @@ namespace PrEngine
             for (int i=0; i < len; i++)
             {
                 Console.WriteLine("\nEnter the number of items of {0} ", sku.unitPrice.ElementAt(i).Key);
-                numberOfItems.Add(sku.unitPrice.ElementAt(i).Key, Convert.ToInt32(Console.ReadLine()));                
+                try
+                {
+                    numberOfItems.Add(sku.unitPrice.ElementAt(i).Key, Convert.ToInt32(Console.ReadLine()));
+                }
+                catch (Exception)
+                {
+                    // Error handeling with Retry mechanism - if non-numeric value is entered for the Number of items.
+                    Console.WriteLine("\nError!! Please Enter Numeric Values Only\n");
+                    i--;
+                }                              
             }
 
             // To apply Promotions and calculate Total Order Value.
