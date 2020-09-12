@@ -18,7 +18,7 @@ namespace PrEngine
         }
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello!! - Press any key to continue adding to your cart...");
+            Console.WriteLine("Hello!! - Press any key to continue adding items to your cart...");
             Console.ReadKey(true);
 
             // Creating Object.
@@ -27,38 +27,33 @@ namespace PrEngine
             int len = sku.unitPrice.Count;
             IDictionary<string, int> numberOfItems = new Dictionary<string, int>();
 
-            // Fetching the number of items for each SKU.
+            // User to enter the number of items added to the cart for each SKU.
             for (int i=0; i < len; i++)
             {
                 Console.WriteLine("\nEnter the number of items of {0} ", sku.unitPrice.ElementAt(i).Key);
                 numberOfItems.Add(sku.unitPrice.ElementAt(i).Key, Convert.ToInt32(Console.ReadLine()));                
             }
 
-            // To apply Promotions and calcute Total Order Value.
+            // To apply Promotions and calculate Total Order Value.
             int totalOrderValue = sku.calculateTotalOrderValue(numberOfItems);
 
-            Console.WriteLine("Total Order value is : " + totalOrderValue);
+            Console.WriteLine("Total Order value : " + totalOrderValue);
             Console.ReadKey();
         }
 
         public int calculateTotalOrderValue(IDictionary<string, int> numberOfItems)
         {
-            int numA = numberOfItems["A"];
-            int numB = numberOfItems["B"];
-            int numC = numberOfItems["C"];
-            int numD = numberOfItems["D"];
-
-            int valueOfA = promoAValue(numA, unitPrice["A"]);
-            int valueOfB = promoBValue(numB, unitPrice["B"]);
-            int valueOfCD = promoCDValue(numC, numD, unitPrice["C"], unitPrice["D"]);
+            int valueOfA = promoAValue(numberOfItems["A"], unitPrice["A"]);
+            int valueOfB = promoBValue(numberOfItems["B"], unitPrice["B"]);
+            int valueOfCD = promoCDValue(numberOfItems["C"], numberOfItems["D"], unitPrice["C"], unitPrice["D"]);
 
             return (valueOfA + valueOfB + valueOfCD);
         }
 
-        public int promoAValue(int a, int price)
+        public int promoAValue(int numA, int price)
         {
-            int promoA = a / 3;
-            int remA = a % 3;
+            int promoA = numA / 3;
+            int remA = numA % 3;
 
             //Promotion - 3 of A's for 130
             int promotion3A = 130;
@@ -69,16 +64,16 @@ namespace PrEngine
             return value;
         }
 
-        public int promoBValue(int b, int price)
+        public int promoBValue(int numB, int price)
         {
-            int promoB = b / 2;
-            int remB = b % 2;
+            int promoB = numB / 2;
+            int remB = numB % 2;
 
             //Promotion - 2 of B's for 45
-            int promotion2b = 45;
+            int promotion2B = 45;
 
             // Applying promotion and calculating total value.
-            int value = (promoB * promotion2b) + (remB * price);
+            int value = (promoB * promotion2B) + (remB * price);
 
             return value;
         }
