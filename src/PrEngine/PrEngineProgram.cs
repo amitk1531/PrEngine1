@@ -50,9 +50,9 @@ namespace PrEngine
 
             int valueOfA = promoAValue(numA, unitPrice["A"]);
             int valueOfB = promoBValue(numB, unitPrice["B"]);
-            //int valueOfCD = promoCDValue(numC, numD, unitPrice["C"], unitPrice["D"]);
+            int valueOfCD = promoCDValue(numC, numD, unitPrice["C"], unitPrice["D"]);
 
-            return valueOfA+valueOfB;
+            return (valueOfA + valueOfB + valueOfCD);
         }
 
         public int promoAValue(int a, int price)
@@ -79,6 +79,38 @@ namespace PrEngine
 
             // Applying promotion and calculating total value.
             int value = (promoB * promotion2b) + (remB * price);
+
+            return value;
+        }
+
+
+        public int promoCDValue(int numC, int numD, int priceC, int priceD)
+        {
+            //Promotion - Pair of C & D for 30
+            int promotionCD = 30;
+
+            // Applying promotion and calculating total value.
+            int value = 0;
+            if (numC == numD)
+            {
+                value = numC * promotionCD;
+            }
+            else if (numC == 0 || numD == 0)
+            {
+                value = (numC * priceC) + (numD * priceD);
+            }
+            else
+            {
+                if (numC > numD)
+                {
+                    value = (numD * promotionCD) + ((numC - numD) * priceC);
+                }
+                else if (numD > numC)
+                {
+                    value = (numC * promotionCD) + ((numD - numC) * priceD);
+                }
+            }
+
 
             return value;
         }
