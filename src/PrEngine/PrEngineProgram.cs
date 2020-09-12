@@ -37,7 +37,7 @@ namespace PrEngine
             // To apply Promotions and calcute Total Order Value.
             int totalOrderValue = sku.calculateTotalOrderValue(numberOfItems);
 
-            Console.WriteLine("Total value is : " + totalOrderValue);
+            Console.WriteLine("Total Order value is : " + totalOrderValue);
             Console.ReadKey();
         }
 
@@ -48,18 +48,37 @@ namespace PrEngine
             int numC = numberOfItems["C"];
             int numD = numberOfItems["D"];
 
-            int valueOfA = calculateValueOfA(numA, unitPrice["A"]);
+            int valueOfA = promoAValue(numA, unitPrice["A"]);
+            int valueOfB = promoBValue(numB, unitPrice["B"]);
+            //int valueOfCD = promoCDValue(numC, numD, unitPrice["C"], unitPrice["D"]);
 
-            return valueOfA;
+            return valueOfA+valueOfB;
         }
 
-        public int calculateValueOfA(int a, int price)
+        public int promoAValue(int a, int price)
         {
             int promoA = a / 3;
             int remA = a % 3;
+
+            //Promotion - 3 of A's for 130
             int promotion3A = 130;
+
             // Applying promotion and calculating total value.
             int value = (promoA * promotion3A) + (remA * price);
+
+            return value;
+        }
+
+        public int promoBValue(int b, int price)
+        {
+            int promoB = b / 2;
+            int remB = b % 2;
+
+            //Promotion - 2 of B's for 45
+            int promotion2b = 45;
+
+            // Applying promotion and calculating total value.
+            int value = (promoB * promotion2b) + (remB * price);
 
             return value;
         }
