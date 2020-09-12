@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace PrEngine
 {
-    public class Program
+    public class PrEngineProgram
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Hello!! - Press any key to continue adding to your cart...");
+            Console.ReadKey(true);
         }
     }
 }
